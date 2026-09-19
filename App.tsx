@@ -3,7 +3,7 @@ import { supabase } from "./supabase";
 
 type Listing={id:string;title:string;description?:string|null;price:number;quantity:number;location?:string|null;images?:string[]|null;category_id?:string|null;seller_id:string;created_at:string;status?:string;categories?:{name:string}|null;profiles?:{full_name:string|null;school:string|null}|null};
 type Category={id:string;name:string};
-type Tab="discover"|"sell"|"activity"|"saved"|"profile";
+type Tab="discover"|"sell"|"messages"|"activity"|"saved"|"profile";
 
 const categories:Category[]=[
 {id:"all",name:"Everything"},{id:"electronics",name:"Electronics"},{id:"fashion",name:"Fashion"},
