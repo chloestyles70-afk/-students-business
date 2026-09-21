@@ -1,14 +1,17 @@
 FROM node:22-alpine AS build
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm install
+RUN npm install --no-audit --no-fund
 COPY . .
 RUN npm run build
 
 FROM node:22-alpine
 WORKDIR /app
-COPY --from=build /app/package*.json ./
-RUN npm install --omit=dev
+
 COPY --from=build /app/dist ./dist
+COPY serve.mjs ./serve.mjs
+
 ENV NODE_ENV=production
-CMD ["sh","-c","npm run preview -- --host 0.0.0.0 --port ${PORT:-4173}"]
+
+CMD ["node", "serve.mjs"]
